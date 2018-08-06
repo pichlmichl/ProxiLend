@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">ProxiLend</string>
+    <string name="profile_name">Name</string>
+    <string name="profile_karma">0</string>
+    <string name="need">Ich Benötige...</string>
+    <string name="offer">Ich Biete...</string>
+    <string name="need_or_offer"> Brauchen sie was oder haben sie was? </string>
+    <string name="entry_name">Um was handelt es sich?</string>
+    <string name="name_hint">Geben sie einen Namen ein</string>
+    <string name="submit_entry">Veröffentlichen</string>
+</resources>
