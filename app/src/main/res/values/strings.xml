@@ -8,4 +8,13 @@
     <string name="entry_name">Um was handelt es sich?</string>
     <string name="name_hint">Geben sie einen Namen ein</string>
     <string name="submit_entry">Veröffentlichen</string>
+    <string name="add">Add</string>
+    <string name="reset">reset</string>
+    <string name="about">Über...</string>
+    <string name="exit">exit</string>
+    <string name="preference">Einstellungen</string>
+    <string name="title_main_activity">Home</string>
+    <string name="title_profile">Profil</string>
+    <string name="title_add_activity">Eintrag erstellen</string>
+    <string name="title_homescreen">Aktuelle Einträge</string>
 </resources>
