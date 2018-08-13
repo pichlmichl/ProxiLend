@@ -8,19 +8,18 @@
     tools:context=".MainActivity"
     android:orientation="vertical">
 
-    <Button
-        android:id="@+id/profile_button"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/currentTasks"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Profil Button"
-        />
+        android:text="@string/title_homescreen"
+        android:gravity="center_horizontal"
+        android:textSize="26sp"/>
 
-    <Button
-        android:id="@+id/add_button"
+    <ListView
+        android:id="@+id/offer_list"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Add Button"
-        />
+        android:layout_height="match_parent" />
 
 
 </LinearLayout>
