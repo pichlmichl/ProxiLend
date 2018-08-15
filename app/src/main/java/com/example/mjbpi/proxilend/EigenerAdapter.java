@@ -11,9 +11,15 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 class EigenerAdapter extends ArrayAdapter<Offer> {
+
+
+    public static final SimpleDateFormat RECENT_FORMAT = new SimpleDateFormat("HH:mm");
+    public static final SimpleDateFormat OLD_FORMAT = new SimpleDateFormat("dd. MMMM");
 
     ArrayList<Offer> offerArrayList;
 
@@ -34,6 +40,20 @@ class EigenerAdapter extends ArrayAdapter<Offer> {
         Offer simpleOffer = offerArrayList.get(position);
         String nameSimpleItem = simpleOffer.getName();
         String userNameItem = simpleOffer.getUsername();
+
+        // Folgende Funktion holt sich die aktuelle Zeit vom aktuellen Objekt und prüft
+        // ob das Erstelldatum schon über 24 Stunden alt ist
+        String date;
+        if (System.currentTimeMillis() - simpleOffer.getCreationDate() < 1000 * 3600 * 24) {
+            // wenn die Erstellmillisekunden jünger als ein Tag alt sind, wird die Zeit als Uhrzeit angezeigt
+            date = RECENT_FORMAT.format(new Date(simpleOffer.getCreationDate()));
+        } else {
+            // Wenn die Erstellmillisekunden älter als ein Tag sind, wird die Zeit als Datum angezeigt
+            date = OLD_FORMAT.format(new Date(simpleOffer.getCreationDate()));
+        }
+        // Dann wird das vorgesehene TextView mit dem Datum gesetzt
+        TextView dateView = (TextView) customView.findViewById(R.id.date_text);
+        dateView.setText(date);
 
         TextView username = (TextView) customView.findViewById(R.id.user_name);
         username.setText(userNameItem);

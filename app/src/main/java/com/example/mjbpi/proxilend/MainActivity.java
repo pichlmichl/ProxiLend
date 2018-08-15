@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
             new AdapterView.OnItemLongClickListener() {
                 @Override
                 public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                        // was passiert wenn man lamnge drauf drückt
+                        // was passiert wenn lannge drauf drückt wird
                         return true;
                 }
             }
@@ -100,21 +100,21 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // Hier wird gecheckt welche Activity mit welcher Aufgabe fertig ist
         if (requestCode == REQUEST_CODE_ADD) {
-
+            // REQUEST_CODE_ADD heißt, es geht um die Eintrag erstellen Funktion
             if(resultCode == Activity.RESULT_OK){
                 Offer resultOffer = data.getParcelableExtra("offer");
                 offerArrayList.add(resultOffer);
-
+                // TODO Hier muss das resultOffer noch hochgeladen werden!!
                 offerArrayAdapter.notifyDataSetChanged();
 
             }
             if (resultCode == Activity.RESULT_CANCELED) {
-                //Write your code if there's no result
-
+                // Hier steht was passiert, wenn kein Ergebnis zurückgegeben wird
             }
         }
-    }//onActivityResult
+    }
 
     private void writeNewUser(String userId, String name, String email) {
         //User user = new User(name, email);

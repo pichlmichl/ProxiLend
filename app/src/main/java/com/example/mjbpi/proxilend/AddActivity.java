@@ -33,8 +33,14 @@ public class AddActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                     String name = editText.getText().toString();
+
+                    // hier wird überprüft ob es ein Angebot oder eine Nachfrage ist
                     if (radioId == R.id.offerButton) {
+                        // Ein offer wird erstellt
                         Offer offer = new Offer(name);
+                        // Hier wird die aktuelle Zeit abgerufen und im Offer gesetzt!
+                        offer.setCreationDate(System.currentTimeMillis());
+                        // Ein result intent gibt das Ergebnis der Main Activity zurück
                         Intent resultIntent = new Intent();
                         resultIntent.putExtra("offer", offer);
                         setResult(Activity.RESULT_OK, resultIntent);
@@ -48,6 +54,7 @@ public class AddActivity extends AppCompatActivity {
             }
         );
     }
+
     private void initActionBar() {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }

@@ -32,6 +32,7 @@ public class ProfileActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
     public boolean onOptionsMenu(Menu menu) {
         return true;
     }
