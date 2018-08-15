@@ -5,12 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
     <TextView
         android:id="@+id/name_entry"
         android:layout_width="384dp"
-        android:layout_height="102dp"
+        android:layout_height="65dp"
         android:text="TextView"
+        tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="0dp"
         />

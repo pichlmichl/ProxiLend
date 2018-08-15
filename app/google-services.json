@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "373670056560",
+    "firebase_url": "https://proxilend.firebaseio.com",
+    "project_id": "proxilend",
+    "storage_bucket": "proxilend.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:373670056560:android:d9300c1b280a0a86",
+        "android_client_info": {
+          "package_name": "com.example.mjbpi.proxilend"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "373670056560-npuc9use6qlraet5pcf1gog8g3p030d9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.mjbpi.proxilend",
+            "certificate_hash": "08db4cfdc9e33568e69d3ebed6686a32c1ca0b94"
+          }
+        },
+        {
+          "client_id": "373670056560-spb6jiu5459v3j8p835iah77n7k9lm9k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBEWwn7VcUIQ0EFQlsnPZJEWRkYn5BGYoQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "373670056560-spb6jiu5459v3j8p835iah77n7k9lm9k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
