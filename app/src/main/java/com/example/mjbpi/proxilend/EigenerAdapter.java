@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
 class EigenerAdapter extends ArrayAdapter<Offer> {
@@ -31,6 +33,10 @@ class EigenerAdapter extends ArrayAdapter<Offer> {
 
         Offer simpleOffer = offerArrayList.get(position);
         String nameSimpleItem = simpleOffer.getName();
+        String userNameItem = simpleOffer.getUsername();
+
+        TextView username = (TextView) customView.findViewById(R.id.user_name);
+        username.setText(userNameItem);
 
         TextView name = (TextView) customView.findViewById(R.id.name_entry);
         name.setText(nameSimpleItem);

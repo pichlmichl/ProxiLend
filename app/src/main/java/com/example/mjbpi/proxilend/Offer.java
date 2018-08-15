@@ -5,6 +5,7 @@ import android.os.Parcelable;
 
 public class Offer implements Parcelable {
 
+    private String mUsername = "Test Username";
     private String mName;
     private int mId = 0;
 
@@ -23,6 +24,11 @@ public class Offer implements Parcelable {
     public String getName() {
         return mName;
     }
+
+    public String getUsername() {
+        return mUsername;
+    }
+
     public void doStuff(){
         doStuff();
     }
