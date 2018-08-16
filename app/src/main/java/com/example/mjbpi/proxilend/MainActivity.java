@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = "text";
     private ArrayAdapter<Offer> offerArrayAdapter;
     private ArrayList<Offer> offerArrayList = new ArrayList<Offer>();
+    int i= 1;
 
     FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
     DatabaseReference myRootRef = mDatabase.getReference();
