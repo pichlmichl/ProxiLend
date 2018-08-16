@@ -2,6 +2,7 @@ package com.example.mjbpi.proxilend;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.annotation.NonNull;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -9,13 +10,16 @@ import java.util.Date;
 public class Offer implements Parcelable {
 
     private String mUsername = "Test Username";
+
+
+
     private String mName;
     private Long mDate;
     private int mId = 0;
 
 
-    public Offer(String name) {
-        this.mName = name;
+    public Offer() {
+
     }
 
     public Offer(Parcel in) {
@@ -27,7 +31,11 @@ public class Offer implements Parcelable {
         mDate = in.readLong();
 
     }
+    public void setmName(String mName) {
+        this.mName = mName;
+    }
 
+    @NonNull
     public String getName() {
         return mName;
     }

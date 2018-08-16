@@ -21,6 +21,8 @@ class EigenerAdapter extends ArrayAdapter<Offer> {
     public static final SimpleDateFormat RECENT_FORMAT = new SimpleDateFormat("HH:mm");
     public static final SimpleDateFormat OLD_FORMAT = new SimpleDateFormat("dd. MMMM");
 
+    private String nameItem;
+
     private Offer simpleOffer;
     ArrayList<Offer> offerArrayList;
 
@@ -54,6 +56,10 @@ class EigenerAdapter extends ArrayAdapter<Offer> {
         return customView;
     }
 
+    public void setNameItem(String nameItem) {
+        this.nameItem = nameItem;
+    }
+
     private String calculateDate() {
         // DieseMethode holt sich die aktuelle Zeit vom aktuellen Objekt und prüft
         // ob das Erstelldatum schon über 24 Stunden alt ist
@@ -67,4 +73,5 @@ class EigenerAdapter extends ArrayAdapter<Offer> {
         }
         return date;
     }
+
 }

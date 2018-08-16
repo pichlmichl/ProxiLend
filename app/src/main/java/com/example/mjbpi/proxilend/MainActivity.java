@@ -23,8 +23,8 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "text";
     private ArrayAdapter<Offer> offerArrayAdapter;
-    private ArrayList<Offer> offerArrayList = new ArrayList<Offer>();
-    int i= 1;
+    private final ArrayList<Offer> offerArrayList = new ArrayList<Offer>();
+    private String entryID;
 
     FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
     DatabaseReference myRootRef = mDatabase.getReference();
@@ -42,18 +42,20 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         //initOnlineDatabase();
         setupList();
+        //entryID = myRootRef.child("Offers").push().getKey();
+
     }
 
     @Override
     protected void onStart() {
         super.onStart();
 
-        mOfferRef.addValueEventListener(new ValueEventListener() {
+        mOfferRef.addListenerForSingleValueEvent(new ValueEventListener() {
 
             // wird immer aufgerufen, wenn "offer" sich in realtime ändert
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                    //Offer offer = dataSnapshot.getValue(Offer.class);
+                showData(dataSnapshot);
                    // offerArrayList.add(offer);
             }
 
@@ -65,6 +67,23 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    private void showData(DataSnapshot dataSnapshot) {
+        Iterable<DataSnapshot> children = dataSnapshot.getChildren();
+
+        for (DataSnapshot child: children){
+
+            Offer offer = (Offer) child.getValue(Offer.class);
+            String name = offer.getName();
+            offer.setmName(name);
+
+            offerArrayList.add(offer);
+            offerArrayAdapter.notifyDataSetChanged();
+
+
+
+        }
     }
 
     private void setupList(){
@@ -135,11 +154,12 @@ public class MainActivity extends AppCompatActivity {
             if(resultCode == Activity.RESULT_OK){
                 Offer resultOffer = data.getParcelableExtra("offer");
                 //offerArrayList.add(resultOffer);
+                //offerArrayAdapter.notifyDataSetChanged();
 
 
                 mOfferRef.push().setValue(resultOffer);
 
-                //offerArrayAdapter.notifyDataSetChanged();
+
 
             }
             if (resultCode == Activity.RESULT_CANCELED) {
