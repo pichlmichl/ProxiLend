@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 public class AddActivity extends AppCompatActivity {
 
@@ -19,7 +21,7 @@ public class AddActivity extends AppCompatActivity {
     private RadioButton offer, need;
     private Button submit;
 
-    private int radioId;
+    private int radioId = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,29 +32,38 @@ public class AddActivity extends AppCompatActivity {
 
         submit.setOnClickListener(
                 new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                    String name = editText.getText().toString();
-
-                    // hier wird überprüft ob es ein Angebot oder eine Nachfrage ist
-                    if (radioId == R.id.offerButton) {
-                        // Ein offer wird erstellt
-                        Offer offer = new Offer(name);
-                        // Hier wird die aktuelle Zeit abgerufen und im Offer gesetzt!
-                        offer.setCreationDate(System.currentTimeMillis());
-                        // Ein result intent gibt das Ergebnis der Main Activity zurück
-                        Intent resultIntent = new Intent();
-                        resultIntent.putExtra("offer", offer);
-                        setResult(Activity.RESULT_OK, resultIntent);
-                        finish();
-
-                    } else if(radioId == R.id.needButton) {
-                        Request request = new Request(name);
+                    @Override
+                    public void onClick(View v) {
+                        createEntry();
                     }
-                }
-
             }
         );
+    }
+
+    private void createEntry(){
+        String name = editText.getText().toString();
+
+        // wir müssen überprüfen, ob ein name eingegeben wurde UND ob ein Feld angekreuzt wurde!
+        if (radioId != -1 && !name.equals("")) {
+            // hier wird überprüft ob es ein Angebot oder eine Nachfrage ist
+            if (radioId == R.id.offerButton) {
+                // Ein offer wird erstellt
+                Offer offer = new Offer(name);
+                // Hier wird die aktuelle Zeit abgerufen und im Offer gesetzt!
+                offer.setCreationDate(System.currentTimeMillis());
+                // Ein result intent gibt das Ergebnis der Main Activity zurück
+                Intent resultIntent = new Intent();
+                resultIntent.putExtra("offer", offer);
+                setResult(Activity.RESULT_OK, resultIntent);
+                finish();
+
+            } else if (radioId == R.id.needButton) {
+                Request request = new Request(name);
+            }
+        } else {
+            // falls nicht alles eingegeben wurde soll ein Toast entstehen
+            Toast.makeText(AddActivity.this, "Error: Bitte geben sie alle Daten ein!", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void initActionBar() {
@@ -86,12 +97,17 @@ public class AddActivity extends AppCompatActivity {
                 if (checkedId == R.id.offerButton) {
                     // Checked ID is an offer
                     radioId = checkedId;
+                    Log.d("yay", "Offer is checked");
                 } else if(checkedId == R.id.needButton) {
                     // Checked ID is a request
                     radioId = checkedId;
+                } else  {
+                    radioId = 420;
+
                 }
             }
         });
+
 
         submit = (Button) findViewById(R.id.submit_button);
 

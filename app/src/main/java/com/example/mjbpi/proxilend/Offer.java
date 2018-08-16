@@ -40,6 +40,10 @@ public class Offer implements Parcelable {
         return mDate;
     }
 
+    public int getId() {
+        return mId;
+    }
+
     public void doStuff(){
         doStuff();
     }

@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,21 +21,49 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    private FirebaseDatabase mDatabase;
-
     private static final String TAG = "text";
     private ArrayAdapter<Offer> offerArrayAdapter;
     private ArrayList<Offer> offerArrayList = new ArrayList<Offer>();
 
-    // Code is 1 because of stackOverFlow
+    FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
+    DatabaseReference myRootRef = mDatabase.getReference();
+
+    // wir erstellen eine Child-Reference von der Datenbank
+    // hat Zugriff auf den /offer Pfad in der Datenbank
+    DatabaseReference mOfferRef = myRootRef.child("Offers");
+    DatabaseReference mRequestRef = myRootRef.child("Requests");
+
     final static int REQUEST_CODE_ADD = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        initDatabase();
+        //initOnlineDatabase();
         setupList();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        mOfferRef.addValueEventListener(new ValueEventListener() {
+
+            // wird immer aufgerufen, wenn "offer" sich in realtime ändert
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                    //Offer offer = dataSnapshot.getValue(Offer.class);
+                   // offerArrayList.add(offer);
+            }
+
+            // error
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
     }
 
     private void setupList(){
@@ -102,12 +129,16 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         // Hier wird gecheckt welche Activity mit welcher Aufgabe fertig ist
         if (requestCode == REQUEST_CODE_ADD) {
+
             // REQUEST_CODE_ADD heißt, es geht um die Eintrag erstellen Funktion
             if(resultCode == Activity.RESULT_OK){
                 Offer resultOffer = data.getParcelableExtra("offer");
-                offerArrayList.add(resultOffer);
-                // TODO Hier muss das resultOffer noch hochgeladen werden!!
-                offerArrayAdapter.notifyDataSetChanged();
+                //offerArrayList.add(resultOffer);
+
+
+                mOfferRef.push().setValue(resultOffer);
+
+                //offerArrayAdapter.notifyDataSetChanged();
 
             }
             if (resultCode == Activity.RESULT_CANCELED) {
@@ -123,26 +154,6 @@ public class MainActivity extends AppCompatActivity {
         //.child(userId).setValue(user);
     }
 
-    private void initDatabase() {
-        mDatabase = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = mDatabase.getReference("user");
-        myRef.setValue("Hello World");
-        myRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
-                String value = dataSnapshot.getValue(String.class);
-                Log.d(TAG, "Value is: " + value);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
-                Log.w(TAG, "Failed to read value.", error.toException());
-            }
-        });
-    }
 
 
 }
