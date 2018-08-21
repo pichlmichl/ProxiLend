@@ -10,7 +10,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -36,6 +38,9 @@ public class MainActivity extends AppCompatActivity {
     // hat Zugriff auf den /offer Pfad in der Datenbank
     DatabaseReference mOfferRef = myRootRef.child("Offers");
     DatabaseReference mRequestRef = myRootRef.child("Requests");
+    DatabaseReference mUserRef = myRootRef.child("User");
+
+    String username;
 
     final static int REQUEST_CODE_ADD = 1;
 
@@ -45,37 +50,32 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         mAuth = FirebaseAuth.getInstance();
+        checkAccount();
 
         setupList();
         //entryID = myRootRef.child("Offers").push().getKey();
 
     }
 
+    private void checkAccount() {
+        if (FirebaseAuth.getInstance().getCurrentUser() == null) {
+            //Go to login
+            Intent loginIntent = new Intent(MainActivity.this, LoginActivity.class);
+            startActivity(loginIntent);
+        }
+    }
+
     @Override
     protected void onStart() {
         super.onStart();
 
-        mOfferRef.addListenerForSingleValueEvent(new ValueEventListener() {
-
-            // wird immer aufgerufen, wenn "offer" sich in realtime ändert
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                showData(dataSnapshot);
-                   // offerArrayList.add(offer);
-            }
-
-            // error
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
 
 
     }
 
     private void showData(DataSnapshot dataSnapshot) {
         Iterable<DataSnapshot> children = dataSnapshot.getChildren();
+
         // damit nicht immer alles dazu addiert wird, muss die Liste immer zuerst geleert werden
         offerArrayList.clear();
 
@@ -83,8 +83,11 @@ public class MainActivity extends AppCompatActivity {
 
             Offer offer = (Offer) child.getValue(Offer.class);
             String name = offer.getName();
-            offer.setmName(name);
-
+            //toastMessage("Name ist:" + name);
+            String offerUploaderId = offer.getId();
+            //toastMessage("Id ist:" + offerUploaderId);
+            offer.setmName(offerUploaderId);
+            offer.setmId();
 
             offerArrayList.add(offer);
             offerArrayAdapter.notifyDataSetChanged();
@@ -92,6 +95,29 @@ public class MainActivity extends AppCompatActivity {
 
 
         }
+    }
+
+    private void checkUser(){
+        mUserRef.addListenerForSingleValueEvent(new ValueEventListener() {
+
+            // wird immer aufgerufen, wenn "offer" sich in realtime ändert
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Iterable<DataSnapshot> children = dataSnapshot.getChildren();
+                for (DataSnapshot child: children){
+
+                    User downloadedUser = (User) child.getValue(User.class);
+                    if (downloadedUser.getId().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
+                        username = downloadedUser.getmUserName();
+                        break;
+                    }
+                }
+            }
+
+            // error
+            @Override
+            public void onCancelled(DatabaseError databaseError) {}
+        });
     }
 
     private void setupList(){
@@ -140,19 +166,39 @@ public class MainActivity extends AppCompatActivity {
             return(true);
 
         case R.id.profile:
+            checkUser();
             Intent profileIntent = new Intent(MainActivity.this, ProfileActivity.class);
+            profileIntent.putExtra("USERNAME", username);
             startActivity(profileIntent);
             return(true);
 
         case R.id.about:
             return(true);
 
-        case R.id.login:
+        case R.id.logout:
+            mAuth.signOut();
+            toastMessage("Sie wurden abgemeldet");
             Intent loginIntent = new Intent(MainActivity.this, LoginActivity.class);
             startActivity(loginIntent);
             return(true);
 
+
         case R.id.refresh:
+            mOfferRef.addListenerForSingleValueEvent(new ValueEventListener() {
+
+                // wird immer aufgerufen, wenn "offer" sich in realtime ändert
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    showData(dataSnapshot);
+                    // offerArrayList.add(offer);
+                }
+
+                // error
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
             return (true);
 
         case R.id.prefs:
@@ -182,6 +228,12 @@ public class MainActivity extends AppCompatActivity {
                 // Hier steht was passiert, wenn kein Ergebnis zurückgegeben wird
             }
         }
+    }
+
+    public void toastMessage(String message){
+        Toast.makeText(
+                MainActivity.this, message,
+                Toast.LENGTH_SHORT).show();
     }
 
 }

@@ -8,14 +8,26 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class ProfileActivity extends AppCompatActivity {
+
+
+    private String setUsername;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
+        Intent intent = getIntent();
+        setUsername = intent.getExtras().getString("USERNAME");
+
+        TextView usernameTextView = (TextView) findViewById(R.id.textName);
+        usernameTextView.setText(setUsername);
     }
 
     @Override
@@ -34,9 +46,9 @@ public class ProfileActivity extends AppCompatActivity {
                 finish();
                 return true;
 
-             case R.id.settings_profile:
-                 //öffne profileinstellungen
-                 return true;
+            case R.id.settings_profile:
+                //öffne profileinstellungen
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -46,4 +58,11 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
 
+    public void setSetUsername(String setUsername) {
+        if (FirebaseAuth.getInstance().getCurrentUser() != null) {
+
+            this.setUsername = setUsername;
+        }
+
+    }
 }

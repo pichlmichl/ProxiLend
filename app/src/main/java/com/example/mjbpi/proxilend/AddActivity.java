@@ -54,7 +54,8 @@ public class AddActivity extends AppCompatActivity {
             if (radioId == R.id.offerButton) {
                 // Ein offer wird erstellt
                 Offer offer = new Offer();
-                offer.setmName(name);
+                offer.setmId();
+                //offer.setmName(name);
                 // Hier wird die aktuelle Zeit abgerufen und im Offer gesetzt!
                 offer.setCreationDate(System.currentTimeMillis());
                 // Ein result intent gibt das Ergebnis der Main Activity zurück

@@ -30,15 +30,26 @@
         android:id="@+id/sign_in"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Anmelden"
+        android:text="@string/login_button"
         tools:layout_editor_absoluteX="126dp"
         tools:layout_editor_absoluteY="212dp" />
+
+    <EditText
+        android:id="@+id/username_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="@string/username_hint"
+        tools:layout_editor_absoluteX="56dp"
+        tools:layout_editor_absoluteY="38dp" />
 
     <Button
         android:id="@+id/registration"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Button"
+        android:text="@string/registration_button"
         tools:layout_editor_absoluteX="126dp"
         tools:layout_editor_absoluteY="311dp" />
+
 </LinearLayout>

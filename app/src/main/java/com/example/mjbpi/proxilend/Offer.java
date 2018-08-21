@@ -4,6 +4,8 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -15,7 +17,7 @@ public class Offer implements Parcelable {
 
     private String mName;
     private Long mDate;
-    private int mId = 0;
+    private String mId;
 
 
     public Offer() {
@@ -25,7 +27,7 @@ public class Offer implements Parcelable {
     public Offer(Parcel in) {
 
         // the order needs to be the same as in writeToParcel() method
-        mId = in.readInt();
+        mId = in.readString();
         mName = in.readString();
         mUsername = in.readString();
         mDate = in.readLong();
@@ -33,6 +35,10 @@ public class Offer implements Parcelable {
     }
     public void setmName(String mName) {
         this.mName = mName;
+    }
+
+    public void setmId() {
+        mId = FirebaseAuth.getInstance().getCurrentUser().getUid();
     }
 
     @NonNull
@@ -48,7 +54,7 @@ public class Offer implements Parcelable {
         return mDate;
     }
 
-    public int getId() {
+    public String getId() {
         return mId;
     }
 
@@ -63,7 +69,7 @@ public class Offer implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(mId);
+        dest.writeString(mId);
         dest.writeString(mName);
         dest.writeString(mUsername);
         dest.writeLong(mDate);

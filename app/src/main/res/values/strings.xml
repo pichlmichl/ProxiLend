@@ -24,4 +24,8 @@
     <string name="email_hint">Email Adresse</string>
     <string name="password_hint">Passwort</string>
     <string name="profile_settings">Profileinstellungen</string>
+    <string name="logout">Abmelden</string>
+    <string name="username_hint">Username</string>
+    <string name="registration_button">Registrieren</string>
+    <string name="login_button">Anmelden</string>
 </resources>
