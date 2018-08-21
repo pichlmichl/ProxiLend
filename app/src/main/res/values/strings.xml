@@ -16,5 +16,12 @@
     <string name="title_main_activity">Home</string>
     <string name="title_profile">Profil</string>
     <string name="title_add_activity">Eintrag erstellen</string>
-    <string name="title_homescreen">Aktuelle Einträge</string>
+    <string name="title_login_activity">Login</string>
+    <string name="title_offer">Aktuelle Angebote</string>
+    <string name="title_requests">Aktuelle Anfragen</string>
+    <string name="refresh">Aktualisieren</string>
+    <string name="login">Login</string>
+    <string name="email_hint">Email Adresse</string>
+    <string name="password_hint">Passwort</string>
+    <string name="profile_settings">Profileinstellungen</string>
 </resources>

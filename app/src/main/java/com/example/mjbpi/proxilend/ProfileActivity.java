@@ -15,20 +15,28 @@ public class ProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-        initActionBar();
+
     }
 
-    private void initActionBar() {
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_profile, menu);
+        return true;
     }
 
-
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         switch (item.getItemId()) {
             case android.R.id.home:
                 finish();
                 return true;
+
+             case R.id.settings_profile:
+                 //öffne profileinstellungen
+                 return true;
         }
         return super.onOptionsItemSelected(item);
     }

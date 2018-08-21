@@ -14,13 +14,18 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 public class AddActivity extends AppCompatActivity {
 
     private EditText editText;
     private RadioGroup type;
     private RadioButton offer, need;
     private Button submit;
+    private String userName;
 
+    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     private int radioId = -1;
 
     @Override
@@ -59,11 +64,19 @@ public class AddActivity extends AppCompatActivity {
                 finish();
 
             } else if (radioId == R.id.needButton) {
-                Request request = new Request(name);
+                //Request request = new Request(name);
             }
         } else {
             // falls nicht alles eingegeben wurde soll ein Toast entstehen
             Toast.makeText(AddActivity.this, "Error: Bitte geben sie alle Daten ein!", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void setUsername() {
+
+        if (user != null) {
+            userName = user.getDisplayName();
+            boolean emailVerified = user.isEmailVerified();
         }
     }
 

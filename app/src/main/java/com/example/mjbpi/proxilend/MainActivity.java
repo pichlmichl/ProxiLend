@@ -16,6 +16,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 
@@ -25,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
     private ArrayAdapter<Offer> offerArrayAdapter;
     private final ArrayList<Offer> offerArrayList = new ArrayList<Offer>();
     private String entryID;
+
+    private FirebaseAuth mAuth;
 
     FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
     DatabaseReference myRootRef = mDatabase.getReference();
@@ -40,7 +43,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //initOnlineDatabase();
+
+        mAuth = FirebaseAuth.getInstance();
+
         setupList();
         //entryID = myRootRef.child("Offers").push().getKey();
 
@@ -71,12 +76,15 @@ public class MainActivity extends AppCompatActivity {
 
     private void showData(DataSnapshot dataSnapshot) {
         Iterable<DataSnapshot> children = dataSnapshot.getChildren();
+        // damit nicht immer alles dazu addiert wird, muss die Liste immer zuerst geleert werden
+        offerArrayList.clear();
 
         for (DataSnapshot child: children){
 
             Offer offer = (Offer) child.getValue(Offer.class);
             String name = offer.getName();
             offer.setmName(name);
+
 
             offerArrayList.add(offer);
             offerArrayAdapter.notifyDataSetChanged();
@@ -139,6 +147,14 @@ public class MainActivity extends AppCompatActivity {
         case R.id.about:
             return(true);
 
+        case R.id.login:
+            Intent loginIntent = new Intent(MainActivity.this, LoginActivity.class);
+            startActivity(loginIntent);
+            return(true);
+
+        case R.id.refresh:
+            return (true);
+
         case R.id.prefs:
             return(true);
     }
@@ -167,14 +183,5 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
-
-    private void writeNewUser(String userId, String name, String email) {
-        //User user = new User(name, email);
-
-        //mDatabase.child("users");
-        //.child(userId).setValue(user);
-    }
-
-
 
 }

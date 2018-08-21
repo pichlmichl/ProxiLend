@@ -9,17 +9,25 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/currentTasks"
+        android:id="@+id/currentOffers"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/title_homescreen"
+        android:text="@string/title_offer"
         android:gravity="center_horizontal"
         android:textSize="26sp"/>
 
     <ListView
         android:id="@+id/offer_list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="220dp" />
+
+    <TextView
+        android:id="@+id/currentRequests"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/title_requests"
+        android:gravity="center_horizontal"
+        android:textSize="26sp"/>
 
 
 </LinearLayout>
