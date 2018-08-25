@@ -14,6 +14,7 @@ import org.w3c.dom.Text;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Map;
 
 class EigenerAdapter extends ArrayAdapter<Offer> {
 
@@ -21,17 +22,16 @@ class EigenerAdapter extends ArrayAdapter<Offer> {
     public static final SimpleDateFormat RECENT_FORMAT = new SimpleDateFormat("HH:mm");
     public static final SimpleDateFormat OLD_FORMAT = new SimpleDateFormat("dd. MMMM");
 
-    private String nameItem;
+    private String mNameItem;
+    private Map<String, User> mUserMap;
 
-    private Offer simpleOffer;
-    ArrayList<Offer> offerArrayList;
+    ArrayList<Offer> mOfferArrayList;
 
-    EigenerAdapter(@NonNull Context context, ArrayList<Offer> offerArrayList) {
+    EigenerAdapter(@NonNull Context context, ArrayList<Offer> offerArrayList, Map<String, User> userMap) {
         super(context, R.layout.custom_list_item, offerArrayList);
 
-        this.offerArrayList = offerArrayList;
-
-
+        mOfferArrayList = offerArrayList;
+        mUserMap = userMap;
     }
 
     @NonNull
@@ -40,13 +40,17 @@ class EigenerAdapter extends ArrayAdapter<Offer> {
         LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View customView = inflater.inflate(R.layout.custom_list_item, parent, false);
 
-        simpleOffer = offerArrayList.get(position);
-        String nameSimpleItem = simpleOffer.getName();
-        String userNameItem = simpleOffer.getUsername();
+        Offer offer = mOfferArrayList.get(position);
+        String nameSimpleItem = offer.getName();
+        String userNameItem = "Unknown...";
+        User user = mUserMap.get(offer.getId());
+        if (user != null){
+            userNameItem = user.getUserName();
+        }
 
         // Dann wird das vorgesehene TextView mit dem Datum gesetzt
         TextView dateView = (TextView) customView.findViewById(R.id.date_text);
-        dateView.setText(calculateDate());
+        dateView.setText(calculateDate(offer));
 
         TextView username = (TextView) customView.findViewById(R.id.user_name);
         username.setText(userNameItem);
@@ -57,19 +61,19 @@ class EigenerAdapter extends ArrayAdapter<Offer> {
     }
 
     public void setNameItem(String nameItem) {
-        this.nameItem = nameItem;
+        mNameItem = nameItem;
     }
 
-    private String calculateDate() {
+    private String calculateDate(Offer offer) {
         // DieseMethode holt sich die aktuelle Zeit vom aktuellen Objekt und prüft
         // ob das Erstelldatum schon über 24 Stunden alt ist
         String date;
-        if (System.currentTimeMillis() - simpleOffer.getCreationDate() < 1000 * 3600 * 24) {
+        if (System.currentTimeMillis() - offer.getCreationDate() < 1000 * 3600 * 24) {
             // wenn die Erstellmillisekunden jünger als ein Tag alt sind, wird die Zeit als Uhrzeit angezeigt
-            date = RECENT_FORMAT.format(new Date(simpleOffer.getCreationDate()));
+            date = RECENT_FORMAT.format(new Date(offer.getCreationDate()));
         } else {
             // Wenn die Erstellmillisekunden älter als ein Tag sind, wird die Zeit als Datum angezeigt
-            date = OLD_FORMAT.format(new Date(simpleOffer.getCreationDate()));
+            date = OLD_FORMAT.format(new Date(offer.getCreationDate()));
         }
         return date;
     }

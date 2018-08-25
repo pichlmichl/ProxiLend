@@ -11,10 +11,6 @@ import java.util.Date;
 
 public class Offer implements Parcelable {
 
-    private String mUsername = "Test Username";
-
-
-
     private String mName;
     private Long mDate;
     private String mId;
@@ -29,12 +25,15 @@ public class Offer implements Parcelable {
         // the order needs to be the same as in writeToParcel() method
         mId = in.readString();
         mName = in.readString();
-        mUsername = in.readString();
         mDate = in.readLong();
 
     }
-    public void setmName(String mName) {
-        this.mName = mName;
+    public void setName(String name) {
+        mName = name;
+    }
+
+    public void setId(String id) {
+        mId = id;
     }
 
     public void setmId() {
@@ -44,10 +43,6 @@ public class Offer implements Parcelable {
     @NonNull
     public String getName() {
         return mName;
-    }
-
-    public String getUsername() {
-        return mUsername;
     }
 
     public Long getCreationDate() {
@@ -71,11 +66,14 @@ public class Offer implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(mId);
         dest.writeString(mName);
-        dest.writeString(mUsername);
         dest.writeLong(mDate);
-
-
     }
+
+
+    public void setCreationDate(Long date) {
+        mDate = date;
+    }
+
 
     //so wie der deutsche typ auf youtube
     public static final Creator<Offer> CREATOR = new Creator<Offer>() {
@@ -88,9 +86,4 @@ public class Offer implements Parcelable {
             return new Offer[size];
         }
     };
-
-
-    public void setCreationDate(Long mDate) {
-        this.mDate = mDate;
-    }
 }
