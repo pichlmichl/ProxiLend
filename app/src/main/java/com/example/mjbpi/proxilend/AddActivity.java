@@ -25,6 +25,11 @@ public class AddActivity extends AppCompatActivity {
     private Button submit;
     private String userName;
 
+    private String mType;
+
+    public static final String OFFER_TYPE = "OFFER";
+    public static final String REQUEST_TYPE = "REQUEST";
+
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     private int radioId = -1;
 
@@ -50,23 +55,23 @@ public class AddActivity extends AppCompatActivity {
 
         // wir müssen überprüfen, ob ein name eingegeben wurde UND ob ein Feld angekreuzt wurde!
         if (radioId != -1 && !name.equals("")) {
-            // hier wird überprüft ob es ein Angebot oder eine Nachfrage ist
-            if (radioId == R.id.offerButton) {
-                // Ein offer wird erstellt
-                Offer offer = new Offer();
-                offer.setmId();
-                //offer.setmName(name);
-                // Hier wird die aktuelle Zeit abgerufen und im Offer gesetzt!
-                offer.setCreationDate(System.currentTimeMillis());
+                // Ein offer_button wird erstellt
+                Entry entry = new Entry();
+                entry.setId(FirebaseAuth.getInstance().getCurrentUser().getUid());
+                entry.setName(name);
+                // Hier wird die aktuelle Zeit abgerufen und im Entry gesetzt!
+                entry.setCreationDate(System.currentTimeMillis());
+                // hier wird überprüft ob es ein Angebot oder eine Nachfrage ist
+                if (radioId == R.id.offerButton) {
+                    entry.setType(OFFER_TYPE);
+                } else if (radioId == R.id.needButton) {
+                    entry.setType(REQUEST_TYPE);
+                }
                 // Ein result intent gibt das Ergebnis der Main Activity zurück
                 Intent resultIntent = new Intent();
-                resultIntent.putExtra("offer", offer);
+                resultIntent.putExtra("entry_key", entry);
                 setResult(Activity.RESULT_OK, resultIntent);
                 finish();
-
-            } else if (radioId == R.id.needButton) {
-                //Request request = new Request(name);
-            }
         } else {
             // falls nicht alles eingegeben wurde soll ein Toast entstehen
             Toast.makeText(AddActivity.this, "Error: Bitte geben sie alle Daten ein!", Toast.LENGTH_SHORT).show();
@@ -112,7 +117,7 @@ public class AddActivity extends AppCompatActivity {
                 if (checkedId == R.id.offerButton) {
                     // Checked ID is an offer
                     radioId = checkedId;
-                    Log.d("yay", "Offer is checked");
+                    Log.d("yay", "Entry is checked");
                 } else if(checkedId == R.id.needButton) {
                     // Checked ID is a request
                     radioId = checkedId;

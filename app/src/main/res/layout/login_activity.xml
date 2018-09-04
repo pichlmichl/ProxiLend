@@ -1,10 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="wrap_content"
+        android:layout_height="200dp"
+        android:layout_gravity="center"
+        android:layout_weight="5"
+        android:textColor="@color/colorPrimary"
+        app:srcCompat="@drawable/proxilend_logo_pic"
+         />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/login_howto"
+        android:textSize="18sp"
+        android:textColor="@color/colorBlack" />
 
     <EditText
         android:id="@+id/email"
@@ -30,16 +47,25 @@
         android:id="@+id/sign_in"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/login_button"
+        android:text="@string/login"
+        android:textColor="@color/colorWhite"
         tools:layout_editor_absoluteX="126dp"
         tools:layout_editor_absoluteY="212dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/registration_howto"
+        android:textSize="18sp"
+        android:textColor="@color/colorBlack" />
 
     <EditText
         android:id="@+id/username_edit_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="textPersonName"
+        android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890_-*#"
+        android:inputType="textFilter"
         android:hint="@string/username_hint"
         tools:layout_editor_absoluteX="56dp"
         tools:layout_editor_absoluteY="38dp" />
@@ -48,7 +74,8 @@
         android:id="@+id/registration"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/registration_button"
+        android:text="@string/registrate"
+        android:textColor="@color/colorWhite"
         tools:layout_editor_absoluteX="126dp"
         tools:layout_editor_absoluteY="311dp" />
 

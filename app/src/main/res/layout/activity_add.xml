@@ -8,46 +8,57 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/need_or_offer"/>
+        android:text="@string/request_or_offer"
+        android:textSize="18sp"
+        android:textColor="@color/colorBlack"
+        android:layout_marginTop="10dp"/>
 
     <RadioGroup
         android:id="@+id/type_group"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp">
 
         <RadioButton
             android:id="@+id/needButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/need" />
+            android:text="@string/request_button" />
 
         <RadioButton
             android:id="@+id/offerButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/offer" />
+            android:text="@string/offer_button" />
     </RadioGroup>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/entry_name"/>
+        android:text="@string/entry_name"
+        android:textSize="18sp"
+        android:textColor="@color/colorBlack"
+        android:layout_marginTop="10dp"/>
 
     <EditText
         android:id="@+id/name_entry"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/name_hint"/>
+        android:hint="@string/name_hint"
+        android:layout_marginTop="10dp"/>
 
     <Button
         android:id="@+id/submit_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/submit_entry" />
+        android:text="@string/submit_entry"
+        android:textColor="@color/colorWhite"
+        android:background="@drawable/proxilend_button"
+        android:layout_marginTop="10dp"/>
 
 
 </LinearLayout>

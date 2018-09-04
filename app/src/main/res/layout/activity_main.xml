@@ -13,21 +13,16 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="@string/title_offer"
+        android:layout_marginTop="11dp"
         android:gravity="center_horizontal"
         android:textSize="26sp"/>
 
     <ListView
         android:id="@+id/offer_list"
+        android:layout_marginTop="11dp"
         android:layout_width="match_parent"
-        android:layout_height="220dp" />
+        android:layout_height="match_parent" />
 
-    <TextView
-        android:id="@+id/currentRequests"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/title_requests"
-        android:gravity="center_horizontal"
-        android:textSize="26sp"/>
 
 
 </LinearLayout>

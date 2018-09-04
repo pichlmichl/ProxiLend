@@ -4,32 +4,33 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
 
-import com.google.firebase.auth.FirebaseAuth;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
-public class Offer implements Parcelable {
+public class Entry implements Parcelable {
 
     private String mName;
     private Long mDate;
     private String mId;
+    private String mType;
+    private String mKey = "not assigned yet";
 
-
-    public Offer() {
+    public Entry() {
 
     }
 
-    public Offer(Parcel in) {
+    public Entry(Parcel in) {
 
         // the order needs to be the same as in writeToParcel() method
         mId = in.readString();
         mName = in.readString();
         mDate = in.readLong();
-
+        mType = in.readString();
     }
+
     public void setName(String name) {
         mName = name;
+    }
+
+    public void setType(String type){
+        mType = type;
     }
 
     public void setId(String id) {
@@ -43,6 +44,14 @@ public class Offer implements Parcelable {
     @NonNull
     public String getName() {
         return mName;
+    }
+
+    public String getType(){
+        return mType;
+    }
+
+    public String getKey(){
+            return mKey;
     }
 
     public Long getCreationDate() {
@@ -67,6 +76,7 @@ public class Offer implements Parcelable {
         dest.writeString(mId);
         dest.writeString(mName);
         dest.writeLong(mDate);
+        dest.writeString(mType);
     }
 
 
@@ -74,16 +84,19 @@ public class Offer implements Parcelable {
         mDate = date;
     }
 
+    public void setKey(String key){
+        mKey = key;
+    }
 
     //so wie der deutsche typ auf youtube
-    public static final Creator<Offer> CREATOR = new Creator<Offer>() {
+    public static final Creator<Entry> CREATOR = new Creator<Entry>() {
 
-        public Offer createFromParcel(Parcel in) {
-            return new Offer(in);
+        public Entry createFromParcel(Parcel in) {
+            return new Entry(in);
         }
 
-        public Offer[] newArray(int size) {
-            return new Offer[size];
+        public Entry[] newArray(int size) {
+            return new Entry[size];
         }
     };
 }

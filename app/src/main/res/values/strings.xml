@@ -1,16 +1,19 @@
 <resources>
+    <string name="about_title">Über ProxiLend</string>
+    <string name="about_description">ProxiLend ("Proxi" = Nähe, "To Lend" = leihen) ist ein App Projekt von Michael Pichlmeier(21) und Laurin Rolny(23) für die Universität Regensburg. Sie erlaubt es, registrierten Usern Einträge in eine Online Datenbank hochzuladen, die dann von anderen registrierten Usern die sich in der Nähe befinden, abgerufen werden können. Der Sinn der App ist es, Nachbarn und Menschen in der unmittelbaren Umgebung mit materiellen Dingen auszuhelfen, die momentan nicht gekauft werden können. Sie brauchen beim Einzug einen Hammer? Veröffentlichen sie eine Anfrage auf ProxiLend! Sie backen nachts um halb 3 einen Last-Minute Geburtstagskuchen und haben keine Milch? ProxiLend! Sie wollen spontan einen Star Wars Marathon machen? ProxiLend! Die App eignet sich für Nachbarschaftsgesellige und Sparfüchse, also vor allem für Studenten. Viel Spass mit ProxiLend! Bei Fragen finden sie hier die Emailadressen der Entwickler.</string>
     <string name="app_name">ProxiLend</string>
+    <string name="error">ERROR</string>
     <string name="profile_name">Name</string>
     <string name="profile_karma">0</string>
-    <string name="need">Ich Benötige...</string>
-    <string name="offer">Ich Biete...</string>
-    <string name="need_or_offer"> Brauchen sie was oder haben sie was? </string>
+    <string name="request_button">Ich Benötige&#8230;</string>
+    <string name="offer_button">Ich Biete&#8230;</string>
+    <string name="request_or_offer"> Hier können Sie ein Angebot oder eine Nachfrage aufgeben. Nutzer in ihrer Nähe sehen diese Einträge. </string>
     <string name="entry_name">Um was handelt es sich?</string>
     <string name="name_hint">Geben sie einen Namen ein</string>
     <string name="submit_entry">Veröffentlichen</string>
     <string name="add">Add</string>
     <string name="reset">reset</string>
-    <string name="about">Über...</string>
+    <string name="about">Über&#8230;</string>
     <string name="exit">exit</string>
     <string name="preference">Einstellungen</string>
     <string name="title_main_activity">Home</string>
@@ -20,12 +23,22 @@
     <string name="title_offer">Aktuelle Angebote</string>
     <string name="title_requests">Aktuelle Anfragen</string>
     <string name="refresh">Aktualisieren</string>
-    <string name="login">Login</string>
-    <string name="email_hint">Email Adresse</string>
+    <string name="login">Anmelden</string>
+    <string name="logout">Abmelden</string>
+    <string name="email_hint">Email-Adresse</string>
     <string name="password_hint">Passwort</string>
     <string name="profile_settings">Profileinstellungen</string>
-    <string name="logout">Abmelden</string>
-    <string name="username_hint">Username</string>
-    <string name="registration_button">Registrieren</string>
-    <string name="login_button">Anmelden</string>
+    <string name="registrate">Registrieren</string>
+    <string name="profile_karma_description">Karma Punkte</string>
+    <string name="logo_name"> ProxiLend </string>
+    <string name="welcome_message">Herzlich Willkommen bei</string>
+    <string name="username_hint">Benutzername</string>
+    <string name="registration_howto">Mit neuem Account registrieren</string>
+    <string name="login_howto">Mit bestehendem Account anmelden</string>
+    <string name="offer_display">Bietet:</string>
+    <string name="offer_arrow">»»»</string>
+    <string name="request_display">Benötigt:</string>
+    <string name="request_arrow">«««</string>
+    <string name="popup_actions">Aktionen</string>
+    <string name="close">Fenster schließen</string>
 </resources>

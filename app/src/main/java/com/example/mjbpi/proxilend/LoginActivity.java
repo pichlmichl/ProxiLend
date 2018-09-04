@@ -93,7 +93,6 @@ public class LoginActivity extends AppCompatActivity{
         usernameEditText = (EditText) findViewById(R.id.username_edit_text);
         loginButton = (Button) findViewById(R.id.sign_in);
         registrationButton = (Button) findViewById(R.id.registration);
-
     }
 
     public void getInputs(){

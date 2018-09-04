@@ -1,0 +1,56 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/popup_1"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#444444"
+    android:orientation="vertical"
+    android:padding="10sp" >
+
+    <TextView
+        android:id="@+id/popup_actions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/popup_actions"
+        android:textColor="@color/colorWhite"
+        android:textSize="23sp"
+        android:layout_gravity="center"/>
+
+    <View
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:background="@color/colorWhite" />
+
+
+    <Button
+        android:id="@+id/show_profile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:text="Profil"
+        android:textColor="@color/colorWhite"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/proxilend_button"/>
+
+    <Button
+        android:id="@+id/delete_entry"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:text="Löschen"
+        android:textColor="@color/colorWhite"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/proxilend_button"/>
+
+    <Button
+        android:id="@+id/close_popup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/proxilend_button"
+        android:text="@string/close"
+        android:textColor="@color/colorWhite" />
+</LinearLayout> 
