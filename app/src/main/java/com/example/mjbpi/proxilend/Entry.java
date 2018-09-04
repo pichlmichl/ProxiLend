@@ -4,6 +4,8 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 public class Entry implements Parcelable {
 
     private String mName;
@@ -35,10 +37,6 @@ public class Entry implements Parcelable {
 
     public void setId(String id) {
         mId = id;
-    }
-
-    public void setmId() {
-        mId = FirebaseAuth.getInstance().getCurrentUser().getUid();
     }
 
     @NonNull

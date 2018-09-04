@@ -50,7 +50,8 @@
         android:text="@string/login"
         android:textColor="@color/colorWhite"
         tools:layout_editor_absoluteX="126dp"
-        tools:layout_editor_absoluteY="212dp" />
+        tools:layout_editor_absoluteY="212dp"
+        android:background="@drawable/proxilend_button"/>
 
     <TextView
         android:layout_width="match_parent"
@@ -77,6 +78,7 @@
         android:text="@string/registrate"
         android:textColor="@color/colorWhite"
         tools:layout_editor_absoluteX="126dp"
-        tools:layout_editor_absoluteY="311dp" />
+        tools:layout_editor_absoluteY="311dp"
+        android:background="@drawable/proxilend_button"/>
 
 </LinearLayout>

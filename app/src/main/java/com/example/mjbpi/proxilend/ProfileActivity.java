@@ -12,22 +12,54 @@ import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class ProfileActivity extends AppCompatActivity {
 
-
-    private String setUsername;
+    private FirebaseDatabase mDatabase;
+    private DatabaseReference myRootRef;
+    private DatabaseReference mUserRef;
+    private TextView mUsernameTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        Intent intent = getIntent();
-        setUsername = intent.getExtras().getString("USERNAME");
+        mDatabase = FirebaseDatabase.getInstance();
+        myRootRef = mDatabase.getReference();
+        mUserRef = myRootRef.child("User");
 
-        TextView usernameTextView = (TextView) findViewById(R.id.textName);
-        usernameTextView.setText(setUsername);
+        mUsernameTextView = (TextView) findViewById(R.id.textName);
+        mUsernameTextView.setText("Loading...");
+        checkUser();
+    }
+
+    private void checkUser(){
+        mUserRef.addListenerForSingleValueEvent(new ValueEventListener() {
+
+            // wird immer aufgerufen, wenn "offer" sich in realtime ändert
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Iterable<DataSnapshot> children = dataSnapshot.getChildren();
+                for (DataSnapshot child: children){
+
+                    User downloadedUser = (User) child.getValue(User.class);
+                    if (downloadedUser.getId().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
+                        mUsernameTextView.setText(downloadedUser.getUserName());
+                        break;
+                    }
+                }
+            }
+
+            // error
+            @Override
+            public void onCancelled(DatabaseError databaseError) {}
+        });
     }
 
     @Override
@@ -57,12 +89,4 @@ public class ProfileActivity extends AppCompatActivity {
         return true;
     }
 
-
-    public void setSetUsername(String setUsername) {
-        if (FirebaseAuth.getInstance().getCurrentUser() != null) {
-
-            this.setUsername = setUsername;
-        }
-
-    }
 }

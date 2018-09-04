@@ -2,36 +2,36 @@ package com.example.mjbpi.proxilend;
 
 public class User {
 
+    String mUserName;
+    String mId;
+    String mMail;
 
-    String id;
-    String mail;
-
-    public void setmUserName(String mUserName) {
+    public void setUserName(String mUserName) {
         this.mUserName = mUserName;
     }
 
-    public String getmUserName() {
+    public String getUserName() {
         return mUserName;
     }
 
-    String mUserName;
+
 
     public User(){}
 
 
     public void setId(String id) {
-        this.id = id;
+        mId = id;
     }
 
     public void setMail(String mail){
-        this.mail = mail;
+        mMail = mail;
     }
     public String getId() {
-        return id;
+        return mId;
     }
 
 
     public String getMail() {
-        return mail;
+        return mMail;
     }
 }

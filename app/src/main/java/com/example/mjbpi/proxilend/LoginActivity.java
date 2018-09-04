@@ -178,7 +178,7 @@ public class LoginActivity extends AppCompatActivity{
 
         newUser.setId(uid);
         newUser.setMail(email);
-        newUser.setmUserName(username);
+        newUser.setUserName(username);
 
         myUserRef.push().setValue(newUser);
         toastMassage("Account wurde erstellt mit folgender Email: " + email);

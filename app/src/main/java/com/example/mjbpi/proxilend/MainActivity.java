@@ -26,6 +26,8 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -38,6 +40,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button showProfile;
     private Button closePopup;
     private Button deleteEntry;
+
+
+    private String username;
 
     private Entry mCurrentEntry;
 
@@ -100,7 +105,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
         mEntryRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            // wird immer aufgerufen, wenn "offer" sich in realtime ändert
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                showData(dataSnapshot);
+                // offerArrayList.add(offer);
+            }
 
+            // error
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
 
     }
@@ -117,6 +134,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             mEntryArrayList.add(entry);
 
         }
+        mOfferArrayAdapter.notifyDataSetChanged();
+
+    }
+
+    private void loadUser(DataSnapshot ds) {
+        Iterable<DataSnapshot> children = ds.getChildren();
+        // damit nicht immer alles dazu addiert wird, muss die Liste immer zuerst geleert werden
+        mUserMap.clear();
+
+        for (DataSnapshot child: children){
+            User user = child.getValue(User.class);
+            mUserMap.put(user.getId(), user);
+
+        }
+        mOfferArrayAdapter.notifyDataSetChanged();
+
     }
 
     private void checkUser(){
@@ -130,7 +163,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                     User downloadedUser = (User) child.getValue(User.class);
                     if (downloadedUser.getId().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
-                        username = downloadedUser.getmUserName();
+                        username = downloadedUser.getUserName();
                         break;
                     }
                 }
@@ -169,7 +202,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         ListView offerViewList = (ListView) findViewById(R.id.offer_list);
         mOfferArrayAdapter = new EigenerAdapter(this, mEntryArrayList, mUserMap);
 
-        offerViewList.setAdapter(offerArrayAdapter);
+        offerViewList.setAdapter(mOfferArrayAdapter);
 
         offerViewList.setOnItemClickListener(
             new AdapterView.OnItemClickListener() {
@@ -231,7 +264,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
         case R.id.refresh:
-            mOfferRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            mEntryRef.addListenerForSingleValueEvent(new ValueEventListener() {
 
                 // wird immer aufgerufen, wenn "offer" sich in realtime ändert
                 @Override
@@ -250,7 +283,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         case R.id.prefs:
             return(true);
-    }
+        }
         return(super.onOptionsItemSelected(item));
     }
 
@@ -299,4 +332,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
         }
     }
+
 }
