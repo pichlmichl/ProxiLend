@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -30,8 +31,11 @@ public class ProfileActivity extends AppCompatActivity {
     private DatabaseReference mUserRef;
 
     private TextView mUsernameTextView;
+    private Button chatButton;
 
+    private int mDistance;
     private String mId;
+
 
     private ArrayAdapter<Entry> mProfileArrayAdapter;
     private ArrayList<Entry> mProfileArrayList = new ArrayList<Entry>();
@@ -51,6 +55,17 @@ public class ProfileActivity extends AppCompatActivity {
 
         mUsernameTextView = (TextView) findViewById(R.id.textName);
         mUsernameTextView.setText("Loading...");
+
+        chatButton = (Button) findViewById(R.id.chat_button);
+        chatButton.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent i = new Intent(ProfileActivity.this, ChatActivity.class);
+                        startActivity(i);
+                    }
+                }
+        );
         checkUser();
         initActionBar();
         setupList();
@@ -61,6 +76,7 @@ public class ProfileActivity extends AppCompatActivity {
         if (extras != null) {
             mId = extras.getString("ID");
             mEntryArrayList = extras.getParcelableArrayList("ENTRIES");
+
         }
 
         checkEntries(mEntryArrayList);
@@ -95,6 +111,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         for (Entry entry: arrayList) {
             if (entry.getId().equals(mId)){
+
                 mProfileArrayList.add(entry);
             }
         }

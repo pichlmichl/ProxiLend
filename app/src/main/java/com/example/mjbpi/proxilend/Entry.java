@@ -31,6 +31,7 @@ public class Entry implements Parcelable {
         mKey = in.readString();
         mLong = in.readDouble();
         mLat = in.readDouble();
+        mDist = in.readInt();
     }
 
     public void setName(String name) {
@@ -112,6 +113,7 @@ public class Entry implements Parcelable {
         dest.writeString(mKey);
         dest.writeDouble(mLat);
         dest.writeDouble(mLong);
+        dest.writeInt(mDist);
     }
 
 

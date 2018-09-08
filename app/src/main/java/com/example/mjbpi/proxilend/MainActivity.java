@@ -16,6 +16,7 @@ import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Build;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -97,6 +98,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setupList();
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         getLocation();
+
     }
 
     private void checkAccount() {
@@ -188,7 +190,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             if (currentDistance < MAX_DISTANCE) {
                 //Die individuelle ID wurde von der Online Datenbank gesetzt und wird hier dem Eintrag gesetzt
                 entry.setKey(child.getKey());
-                //Die soeben errechnete Distanz wird gesetzt um im Layout angezeigt werden zu können
+                //Die errechnete Distanz wird gesetzt um im Layout angezeigt werden zu können
                 entry.setDistance(currentDistance);
                 mEntryArrayList.add(entry);
             } else {
@@ -208,7 +210,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
          bitten wir um Verständnis für die fehlende Dokumentation.
          */
         if (mUserLong == null || mUserLat == null) {
-            toastMessage("Kein ort verfügbar!");
+            //toastMessage("Kein ort verfügbar!");
         } else {
             double earthRadius = 6371000; // Erdradius in Meter
             double dLat = Math.toRadians(latEntry - mUserLat);
@@ -326,7 +328,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.close_popup:
                 popupWindow.dismiss();
                 break;
-
+            case R.id.fab:
+                break;
             case R.id.show_profile:
                 Intent profileIntent = new Intent(MainActivity.this, ProfileActivity.class);
                 profileIntent.putExtra("ID", mCurrentEntry.getId());

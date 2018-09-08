@@ -8,5 +8,6 @@
     <color name="colorWhite">#ffffff</color>
     <color name="lightGreen">#00c609</color>
     <color name="lightRed">#b30003</color>
+    <color name="floating_action_button_color">#4b638f</color>
 
 </resources>
