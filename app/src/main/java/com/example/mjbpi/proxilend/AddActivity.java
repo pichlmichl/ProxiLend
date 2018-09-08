@@ -1,8 +1,15 @@
 package com.example.mjbpi.proxilend;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Criteria;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -16,6 +23,11 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.security.Provider;
+import java.util.ArrayList;
 
 public class AddActivity extends AppCompatActivity {
 
@@ -23,8 +35,10 @@ public class AddActivity extends AppCompatActivity {
     private RadioGroup type;
     private RadioButton offer, need;
     private Button submit;
-    private String userName;
 
+    private Double mLong, mLat;
+
+    private String userName;
     private String mType;
 
     public static final String OFFER_TYPE = "OFFER";
@@ -40,11 +54,19 @@ public class AddActivity extends AppCompatActivity {
         initUI();
         initActionBar();
 
+        Intent dataIntent = getIntent();
+        Bundle extras = dataIntent.getExtras();
+        mLong = extras.getDouble("LONGITUDE");
+        mLat = extras.getDouble("LATITUDE");
+
+
+
         submit.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         createEntry();
+                        //getLocation();
                     }
             }
         );
@@ -67,6 +89,8 @@ public class AddActivity extends AppCompatActivity {
                 } else if (radioId == R.id.needButton) {
                     entry.setType(REQUEST_TYPE);
                 }
+
+
                 // Ein result intent gibt das Ergebnis der Main Activity zurück
                 Intent resultIntent = new Intent();
                 resultIntent.putExtra("entry_key", entry);
@@ -132,6 +156,12 @@ public class AddActivity extends AppCompatActivity {
         submit = (Button) findViewById(R.id.submit_button);
 
 
+    }
+
+    public void toastMessage(String message){
+        Toast.makeText(
+                AddActivity.this, message,
+                Toast.LENGTH_SHORT).show();
     }
 
 

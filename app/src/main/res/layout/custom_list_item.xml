@@ -78,16 +78,24 @@
 
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:layout_marginTop="11dp">
 
         <TextView
             android:id="@+id/name_entry"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="entry"
-            android:textSize="21sp"
+            android:textSize="22sp"
+            />
+        <TextView
+            android:id="@+id/distance_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="distance"
+            android:textSize="18sp"
             />
 
     </LinearLayout>

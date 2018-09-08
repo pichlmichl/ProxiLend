@@ -13,6 +13,9 @@ public class Entry implements Parcelable {
     private String mId;
     private String mType;
     private String mKey = "not assigned yet";
+    private Double mLong = 0.0;
+    private Double mLat = 0.0;
+    private int mDist;
 
     public Entry() {
 
@@ -25,6 +28,9 @@ public class Entry implements Parcelable {
         mName = in.readString();
         mDate = in.readLong();
         mType = in.readString();
+        mKey = in.readString();
+        mLong = in.readDouble();
+        mLat = in.readDouble();
     }
 
     public void setName(String name) {
@@ -37,6 +43,38 @@ public class Entry implements Parcelable {
 
     public void setId(String id) {
         mId = id;
+    }
+
+    public void setCreationDate(Long date) {
+        mDate = date;
+    }
+
+    public void setKey(String key){
+        mKey = key;
+    }
+
+    public void setLongitude(Double longitude){
+        mLong = longitude;
+    }
+
+    public void setLatitude(Double latitude) {
+        mLat = latitude;
+    }
+
+    public void setDistance(int dist){
+        mDist = dist;
+    }
+
+    public int getDistance(){
+        return mDist;
+    }
+
+    public Double getLongitude(){
+        return mLong;
+    }
+
+    public Double getLatitude() {
+        return mLat;
     }
 
     @NonNull
@@ -60,10 +98,6 @@ public class Entry implements Parcelable {
         return mId;
     }
 
-    public void doStuff(){
-        doStuff();
-    }
-
     @Override
     public int describeContents() {
         return 0;
@@ -75,16 +109,13 @@ public class Entry implements Parcelable {
         dest.writeString(mName);
         dest.writeLong(mDate);
         dest.writeString(mType);
+        dest.writeString(mKey);
+        dest.writeDouble(mLat);
+        dest.writeDouble(mLong);
     }
 
 
-    public void setCreationDate(Long date) {
-        mDate = date;
-    }
 
-    public void setKey(String key){
-        mKey = key;
-    }
 
     //so wie der deutsche typ auf youtube
     public static final Creator<Entry> CREATOR = new Creator<Entry>() {

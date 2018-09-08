@@ -1,4 +1,5 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/popup_1"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
@@ -35,14 +36,24 @@
         android:background="@drawable/proxilend_button"/>
 
     <Button
+        android:id="@+id/interest"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:text="Interesse!"
+        android:textColor="@color/colorWhite"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/proxilend_button"/>
+
+    <Button
         android:id="@+id/delete_entry"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:text="Löschen"
-        android:textColor="@color/colorWhite"
         android:layout_marginTop="5dp"
-        android:background="@drawable/proxilend_button"/>
+        android:background="@drawable/proxilend_button"
+        android:text="Löschen"
+        android:textColor="@color/colorWhite" />
 
     <Button
         android:id="@+id/close_popup"

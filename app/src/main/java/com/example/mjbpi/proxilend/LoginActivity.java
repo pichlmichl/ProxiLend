@@ -54,9 +54,10 @@ public class LoginActivity extends AppCompatActivity{
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if(user != null){
                     //User ist angemeldet
-                    toastMassage("Angemeldet mit: " + user.getEmail());
-                }else {
+
+                }else{
                     //User ist abgemeldet
+                    //toastMessage("Bitte alles richtig eingeben!");
 
                 }
             }
@@ -70,8 +71,6 @@ public class LoginActivity extends AppCompatActivity{
               public void onClick(View v) {
                     getInputs();
                     signIn();
-                    finish();
-
                   }
            });
 
@@ -126,34 +125,54 @@ public class LoginActivity extends AppCompatActivity{
     }
 
     public void createAccount() {
+
         if(!email.equals("") && !password.equals("")) {
+            if(password.length() > 5) {
+                mAuth.createUserWithEmailAndPassword(email, password)
+                        .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                Log.d(TAG, "createUserWithEmail:onComplete:" + task.isSuccessful());
 
-            mAuth.createUserWithEmailAndPassword(email, password)
-                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                @Override
-                public void onComplete(@NonNull Task<AuthResult> task) {
-                    Log.d(TAG, "createUserWithEmail:onComplete:" + task.isSuccessful());
-
-                    if (task.isSuccessful()) {
-                        FirebaseUser user = task.getResult().getUser();
-                        Log.d(TAG, "onComplete: uid=" + user.getUid());
-                        createUser();
-                    }
-                }
-            });;
-
-
+                                if (task.isSuccessful()) {
+                                    FirebaseUser user = task.getResult().getUser();
+                                    Log.d(TAG, "onComplete: uid=" + user.getUid());
+                                    createUser();
+                                }
+                            }
+                        });
+            } else {
+                toastMessage(getString(R.string.password_hint_length));
+            }
         }
     }
 
-    public void signIn() {
-        if(!email.equals("") && !password.equals("")) {
-            mAuth.signInWithEmailAndPassword(email, password);
-            toastMassage("Erfolgreich angemeldet mit: " + email);
-        }else{
-            toastMassage("Bitte allles eingeben!");
 
+    public void toastMessage(String message){
+        Toast.makeText(
+                LoginActivity.this, message,
+                Toast.LENGTH_SHORT).show();
     }
+
+    public void signIn() {
+
+        if(!email.equals("") && !password.equals("")) {
+            mAuth.signInWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+
+                            if (task.isSuccessful()) {
+                                toastMessage("Angemeldet mit: " + email);
+                                finish();
+                            } else {
+                                toastMessage("Falsches Passwort oder falsche Email!");
+                            }
+                        }
+                    });
+        }else{
+            toastMessage("Bitte allles eingeben!");
+            }
     }
 
     public boolean onOptionsItemSelected(android.view.MenuItem item) {
@@ -166,11 +185,6 @@ public class LoginActivity extends AppCompatActivity{
         return super.onOptionsItemSelected(item);
     }
 
-    public void toastMassage(String message){
-        Toast.makeText(
-                LoginActivity.this, message,
-                Toast.LENGTH_SHORT).show();
-    }
 
     private void createUser(){
         User newUser = new User();
@@ -181,7 +195,7 @@ public class LoginActivity extends AppCompatActivity{
         newUser.setUserName(username);
 
         myUserRef.push().setValue(newUser);
-        toastMassage("Account wurde erstellt mit folgender Email: " + email);
+        toastMessage("Account wurde erstellt mit folgender Email: " + email);
         finish();
     }
 }
