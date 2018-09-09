@@ -35,6 +35,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     private int mDistance;
     private String mId;
+    private String mUsername;
 
 
     private ArrayAdapter<Entry> mProfileArrayAdapter;
@@ -57,15 +58,7 @@ public class ProfileActivity extends AppCompatActivity {
         mUsernameTextView.setText("Loading...");
 
         chatButton = (Button) findViewById(R.id.chat_button);
-        chatButton.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent i = new Intent(ProfileActivity.this, ChatActivity.class);
-                        startActivity(i);
-                    }
-                }
-        );
+
         checkUser();
         initActionBar();
         setupList();
@@ -81,7 +74,17 @@ public class ProfileActivity extends AppCompatActivity {
 
         checkEntries(mEntryArrayList);
 
-
+        chatButton.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent i = new Intent(ProfileActivity.this, ChatActivity.class);
+                        i.putExtra("ID", mId);
+                        i.putExtra("NAME", mUsername);
+                        startActivity(i);
+                    }
+                }
+        );
     }
 
     private void checkUser(){
@@ -95,7 +98,9 @@ public class ProfileActivity extends AppCompatActivity {
                 for (DataSnapshot child: children){
                     User downloadedUser = (User) child.getValue(User.class);
                     if ((downloadedUser.getId()).equals(mId)) {
-                        mUsernameTextView.setText(downloadedUser.getUserName());
+                        mUsername = downloadedUser.getUserName();
+                        mUsernameTextView.setText(mUsername);
+
                         break;
                     }
                 }

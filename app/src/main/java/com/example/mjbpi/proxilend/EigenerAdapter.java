@@ -64,6 +64,7 @@ class EigenerAdapter extends ArrayAdapter<Entry> {
 
         TextView distanceView = (TextView) customView.findViewById(R.id.distance_text);
         distanceView.setText("Entfernung: " + entry.getDistance() + "m");
+        distanceView.setGravity(Gravity.CENTER);
 
         TextView name = (TextView) customView.findViewById(R.id.name_entry);
         name.setText(nameSimpleItem);

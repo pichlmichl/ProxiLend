@@ -32,15 +32,16 @@
             app:showAsAction="always">
         </item>
         <item
-            android:id="@+id/logout"
-            android:icon="@android:drawable/ic_popup_sync"
-            android:title="@string/logout"
-            app:showAsAction="never">
-        </item>
-        <item
             android:id="@+id/refresh_location"
             android:icon="@android:drawable/ic_popup_sync"
             android:title="@string/refresh_location_text"
             app:showAsAction="never">
         </item>
+        <item
+            android:id="@+id/logout"
+            android:icon="@android:drawable/ic_popup_sync"
+            android:title="@string/logout"
+            app:showAsAction="never">
+        </item>
+
     </menu>

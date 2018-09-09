@@ -388,6 +388,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             case R.id.refresh_location:
                 getLocation();
+                refreshDataLists();
             return(true);
 
         case R.id.logout:

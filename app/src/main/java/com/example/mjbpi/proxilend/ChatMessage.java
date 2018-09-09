@@ -5,6 +5,8 @@ public class ChatMessage {
     private String mName;
     private String mId;
     private String mMessage;
+    private Long mDate;
+    private String mChatroomKey;
 
     public ChatMessage() {
         // empty constructor
@@ -32,5 +34,21 @@ public class ChatMessage {
 
     public void setId(String id) {
         mId = id;
+    }
+
+    public Long getCreationDate() {
+        return mDate;
+    }
+
+    public void setCreationDate(Long mDate) {
+        this.mDate = mDate;
+    }
+
+    public String getChatroomKey() {
+        return mChatroomKey;
+    }
+
+    public void setChatroomKey(String mChatroomKey) {
+        this.mChatroomKey = mChatroomKey;
     }
 }

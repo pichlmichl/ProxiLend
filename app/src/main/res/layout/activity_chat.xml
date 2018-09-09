@@ -2,34 +2,42 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
-    <ListView
-        android:id="@+id/offer_list"
-        android:layout_marginTop="11dp"
-        android:layout_width="match_parent"
-        android:layout_height="600dp" />
 
-    <EditText
-        android:id="@+id/username_edit_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890_-*#"
-        android:inputType="textFilter"
-        android:hint="@string/username_hint"
-        tools:layout_editor_absoluteX="56dp"
-        tools:layout_editor_absoluteY="38dp" />
 
-    <Button
-        android:id="@+id/registration"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/registrate"
-        android:textColor="@color/colorWhite"
-        tools:layout_editor_absoluteX="126dp"
-        tools:layout_editor_absoluteY="311dp"
-        android:background="@drawable/proxilend_button"/>
+        <ListView
+            android:id="@+id/message_list"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginTop="5dp"/>
+    <View
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:background="#dfdfdf"
+        android:layout_marginBottom="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/layout_chatbox"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+        <EditText
+            android:id="@+id/input_chat_message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:hint="@string/message_hint"/>
+
+        <Button
+            android:id="@+id/send_message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:text="send"
+            android:textColor="@color/colorWhite"
+            android:background="@drawable/proxilend_button"/>
+
+
 
 </LinearLayout>
