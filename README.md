@@ -1,5 +1,5 @@
 # ProxiLend
-Projekt von Michael Pichlmeier und Laurin Kröllinger für die Universität Regensburg.
+Projekt von Michael Pichlmeier und Laurin Rolny für die Universität Regensburg.
 ProxiLend ("Proxi" = Nähe, "To Lend" = leihen) ist ein App Projekt von Michael Pichlmeier(21) und Laurin Rolny(22) 
 für die Universität Regensburg. Sie erlaubt es, registrierten Usern Einträge in eine Online Datenbank hochzuladen, 
 die dann von anderen registrierten Usern die sich in der Nähe befinden, abgerufen werden können. 
